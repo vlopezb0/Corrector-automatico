@@ -1,0 +1,1 @@
+Aquí irán guardadas las gráficas, en caso de no tener este archivo, la carpeta desaparecerá.
