@@ -21,4 +21,4 @@ Considerando que su programa funcione bien, han realizado las pruebas del progra
 
 
 
-Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10, representándolo en un número. Solo quiero que respondas el número, ninguna frase más.
+Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10 en relación a los tests probados, representándolo en un número. Razónalo paso a paso.

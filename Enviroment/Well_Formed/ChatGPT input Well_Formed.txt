@@ -51,4 +51,4 @@ El codigo es el siguiente:
 
 
 
-Respuesta:  Tienes que decir cuales de estos se producen, representándolo en una sucesión de 0s y 1s separados por comas. Marcarás con un 1 los que sí se producen, y con un 0 los que no, en un formato que se pueda copiar y pegar y apareciendo todos 33 los errores. Solo quiero que respondas la sucesión de 33 1s y 0s, ninguna frase más.
+Respuesta:  Tienes que decir cuales de estos se producen, representándolo en una sucesión de 0s y 1s separados por comas. Marcarás con un 1 los que sí se producen, y con un 0 los que no, en un formato que se pueda copiar y pegar y apareciendo todos 33 los errores. Razónalo paso a paso.

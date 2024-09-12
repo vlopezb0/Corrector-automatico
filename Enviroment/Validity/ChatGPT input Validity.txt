@@ -27,4 +27,4 @@ El código es el siguiente:
 
 
 
-Respuesta:  Tienes que decir si cumple las restricciones indicadas, respondiendo al final con un bloque de codigo con un 1 si lo cumple y un 0 si no lo cumple, sin ninguna palabra más. 
+Respuesta:  Tienes que decir si cumple las restricciones indicadas, respondiendo al final con un 1 si lo cumple y un 0 si no lo cumple. Razónalo paso a paso

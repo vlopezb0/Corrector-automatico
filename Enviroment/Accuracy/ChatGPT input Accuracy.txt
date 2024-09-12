@@ -36,4 +36,4 @@ El codigo es el siguiente:
 
 
 
-Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10 por como se asemeja el código a la tarea encargada, representándolo en un número. 
+Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10 por como se asemeja el código a la tarea encargada, representándolo en un número. Razónalo paso a paso.
