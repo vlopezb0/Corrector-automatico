@@ -1,0 +1,39 @@
+Unos alumnos han realizado el siguiente programa Java:
+
+Con el objetivo de seguir practicando la creación de sesiones y clientes, el envío y recepción de mensajes a través de canales y, en este caso, la manipulación de diferentes tipos de mensajes, crear un programa en Java que realice lo siguiente:
+
+(a) Inicialmente se lanzará el registro de JSDT.
+
+(b) Crear una sesión (ses) y dos canales (ch1 y ch2) asociados a ella.
+
+(c) Crear tres clientes (cl1, cl2 y cl3) con el siguiente comportamiento:
+
+(c.1) El cliente cl1 se encargará de enviar al cliente cl2, a través de ch1, un mensaje indicando una operación aritmética a realizar: suma, inverso o máximo de tres números. Para cada operación se utilizará un tipo (clase) de mensaje diferente (de hecho, cada operación requiere diferente número de operandos).
+
+(c.2) Así, el cliente cl2 recibirá operaciones aritméticas por ch1, calculará su resultado y lo enviará a cl3 a través de ch2.
+
+(c.3) El tercer cliente, cl3, mostrará el resultado de las operaciones por pantalla.
+
+(d) Se deberá desarrollar un ejemplo de realización de tres operaciones de acuerdo al esquema planteado. No hará falta por tanto leer ningún dato por teclado, sino que el ejemplo de cada operación se codificará en el programa principal.
+
+(e) Finalmente, el registro se detendrá.
+
+
+
+
+El codigo es el siguiente:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10 por como se asemeja el código a la tarea encargada, representándolo en un número. 

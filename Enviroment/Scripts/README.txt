@@ -1,1 +1,0 @@
-Esto son scripts para facilitar tareas puntuales que hubiesen llevado mucho hacerlo a mano. 
