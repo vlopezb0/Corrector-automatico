@@ -1,0 +1,30 @@
+Voy a pasarte un código de Java que intenta resolver el siguiente problema:
+
+Haciendo uso de JSDT, crear una estructura de sesiones, canales y clientes donde se trata de crear dos sesiones. En la primera se crearán tres canales, y en la segunda otros dos. Hay también que crear cinco clientes (C1-C5). Estos clientes se asocian a los canales como indica la figura. Todos los clientes pueden enviar y recibir datos por los canales a los que están vinculados.
+
+Una vez creada esta estructura, cada cliente enviará un número aleatorio por “sus” canales. Los clientes que reciban estos números deben visualizar la suma de ellos y la media según vayan recibiendo números. 
+
+El registro debe quedar detenido y las sesiones cerradas al finalizar la ejecución del programa. Los clientes deberán abandonar las sesiones y los canales.
+
+
+Las restricciones de la tarea son:
+
+-Lanzar el registro en el mismo programa (clase) que cree dicha estructura.
+-Crear el servidor y los clientes en la misma máquina (localhost).
+-Un cliente no se enviará a sí mismo ningún mensaje.
+-No ubicar las clases creadas en ningún paquete.
+
+
+El código es el siguiente:
+
+
+
+
+
+
+
+
+
+
+
+Respuesta:  Tienes que decir si cumple las restricciones indicadas, respondiendo al final con un bloque de codigo con un 1 si lo cumple y un 0 si no lo cumple, sin ninguna palabra más. 

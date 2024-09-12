@@ -1,0 +1,105 @@
+import re
+
+"""
+Función para contar lineas de un fichero
+
+Args:
+    -path: Directorio donde se encuentra el fichero
+
+Returns:
+    -num_lineas: Número de lineas del fichero    
+
+"""
+def count_lines(path):
+
+    fich = open(path,'r')
+
+    num_lineas = len(fich.readlines())
+
+    return num_lineas
+# Problema: Se puede escribir todo en una linea para evitar coste
+
+"""
+Función para contar palabras de un fichero
+
+Args:
+    -path: Directorio donde se encuentra el fichero
+
+Returns:
+    -num_palabras: Número de palabras del fichero    
+
+"""
+def count_palabras(path):
+
+    fich = open(path,'r')
+
+    num_palabras = sum(list(map(len,(map(str.split,fich.readlines()))))) 
+
+    return num_palabras
+# Problema: Si no se usan espacios pueden pasarse lineas enteras por una palabra
+
+
+"""
+Función para contar tokens de un fichero
+
+Args:
+    -path: Directorio donde se encuentra el fichero
+
+Returns:
+    -num_tokens: Número de tokens del fichero    
+
+"""
+def count_tokens(path):
+
+    fich = open(path,'r')
+    
+    lineas = fich.read()
+    
+    tokens = re.split('(;|{|}|\)|\(|\.|\+|\-|\=|\n|\s|\"|\,|\[|\])+',lineas)
+
+    tokens = list(filter(lambda x: x != " " and x != "\n",filter(None,tokens)))
+
+    num_tokens = len(tokens)
+
+    return num_tokens
+## Problema: Los comentarios computan en el Coste
+
+"""
+Función para contar tokens de un fichero sin los comentarios
+
+Args:
+    -path: Directorio donde se encuentra el fichero
+
+Returns:
+    -num_tokens: Número de tokens del fichero    
+
+"""
+def count_tokens_comment(path):
+
+    fich = open(path,'r')
+    
+    lineas = fich.readlines()
+
+    tokens = list(map(lambda x : x.split("//")[0],lineas))
+
+    tokens = list(map(lambda x:re.sub(r'(^\*.*|^\\\*.*|^\/\*.*)',"",x),tokens))
+
+    # print(tokens)
+    # print(lineas)
+
+    tokens = list(map(lambda x: re.split('(\;|{|}|\)|\(|\.|\+|\-|\=|\n|\s|\"|\,|\[|\])+',x),tokens))
+
+    # print(tokens)
+
+    tokens = list(map(lambda y:list(filter(lambda x: x != " " and x != "\n",filter(None,y))),tokens))
+    
+    # print(tokens)
+
+    num_tokens = sum(map(len,tokens))
+
+    return num_tokens
+
+
+
+# path = r"C:\Users\Víctor\Desktop\TFM\Archivos\sc\a\sc19%sca-09%12_25_25.java"
+# print(count_tokens_comment(path))

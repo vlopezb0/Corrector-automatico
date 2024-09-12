@@ -1,0 +1,6 @@
+Nombre;Bien;Compila;Puntocoma;FaltaVariable;VoidReturn;PrimiMisspell;FaltaReturn;OutIncorrecto;VariableNoDeclarada;VariableNoIni;Llaves;ImportMal;ConstructorClaseIgual;VariableNoUsada;TokensExtra;Parentesis;RecursionInf ;ExtraPuntoComa;PuntoComaPorComa;VariableDupli;FuncionNoDef;ExcepcionInnece;NumArgFuncion;MalLlamadaFuncion;InputVacio;IndexOutOfBounds;VariableUsandoPrimi;Comentario;WhileInf;NoInput;Division0;StringMal;TipoErroneo;LecturaInput;Accuracy;Difficulty;Cost;WellFormed;Validity;Experimentability;Quality
+iub-2%11_58_37;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;1;1;0;0
+iub-4%11_23_52;0;0;0;1;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;1;0;0;0
+iub-5%11_45_08;0;1;0;0;0;0;0;1;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;1;0;0;1;1;0;1
+iub-6%11_14_50;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;1;1;0;0;1;1;0;1
+iub-7%11_33_02;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;1;1;0;1

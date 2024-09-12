@@ -1,0 +1,24 @@
+Unos alumnos han realizado el siguiente programa Java:
+
+Programación con JSDT 2: Create a menu with options for managing sessions, channels and clients, and for sending messages
+ESPECIFICACIÓN DE REQUISITOS:
+
+Haciendo uso de JSDT, crear un programa en Java que muestre un menú con las siguientes opciones:
+
+(1) Inicio/Parada del registro de JSDT.
+(2) Creación de un cliente, una sesión y un canal, suministrando sus nombres y la dirección y puerto de la sesión. El cliente se añadirá automáticamente a la sesión y al canal (el canal se asociará a la sesión indicada). Cada cliente será un objeto que desempeñará el doble rol enviar-recibir datos.
+(3) Listar las sesiones activas.
+(4) Salir.
+
+
+
+Considerando que su programa funcione bien, han realizado las pruebas del programa, con los siguientes inputs de prueba:
+
+
+
+
+
+
+
+
+Respuesta:  Tienes que dar una nota a los alumnos del 1 al 10, representándolo en un número. Solo quiero que respondas el número, ninguna frase más.
