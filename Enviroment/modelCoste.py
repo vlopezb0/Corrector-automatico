@@ -8,14 +8,18 @@ import numpy as np
 from sklearn.linear_model import LinearRegression, LogisticRegressionCV
 import time
 import boxplot
+from pathlib import Path
+import warnings
 
 def Coste(axs,debug=0):
 
-    aucs = "C://Users//Víctor//Desktop//TFM//Enviroment//Coste//auc.txt"
+    current_path = str(Path.cwd()).replace("\\","//")
+
+    aucs = current_path + "//Coste//auc.txt"
 
     fileauc = open(aucs,"a")
 
-    path="C://Users//Víctor//Desktop//TFM//Enviroment//Coste//ProblemasCoste4.csv"
+    path = current_path + "//Coste//ProblemasCosteTokens.csv"
 
     file = read_csv(path,sep=";")
 
@@ -109,10 +113,13 @@ def Coste(axs,debug=0):
     
 if __name__ == '__main__':
     boxplot.borra("Coste")
-    graficas = "C://Users//Víctor//Desktop//TFM//Enviroment//Graficas//"
+    current_path = str(Path.cwd()).replace("\\","//")
+    graficas = current_path + "//Graficas//"
     _,ax = plt.subplots()
+    warnings.filterwarnings("ignore")
     for i in range(100):
         Coste(ax)
+    warnings.filterwarnings("default")
     ax.legend().remove()
     plt.savefig(graficas+"Coste.png")    
     boxplot.boxplot("Coste")

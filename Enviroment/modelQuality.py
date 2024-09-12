@@ -7,14 +7,18 @@ from sklearn.linear_model import LogisticRegressionCV
 import matplotlib.pyplot as plt
 import itertools
 import boxplot
+from pathlib import Path
+
 
 def Quality(axs,comb,debug=0):
 
-    aucs = "C://Users//Víctor//Desktop//TFM//Enviroment//Quality//auc.txt"
+    current_path = str(Path.cwd()).replace("\\","//")
+
+    aucs = current_path + "//Quality//auc.txt"
 
     fileauc = open(aucs,"a")
 
-    path="C://Users//Víctor//Desktop//TFM//Enviroment//Quality//TodoslosDatos2.csv"
+    path= current_path + "//Quality//TodoslosDatos.csv"
 
     file = read_csv(path,sep=";")
 
@@ -61,8 +65,6 @@ def Quality(axs,comb,debug=0):
                 alpha=0.01,
                 label="_no"
             )
-
-    # axs.get_legend().remove()
 
     tpr = np.interp(np.linspace(0,1,100),display.fpr, display.tpr)
     tpr[0] = 0.0

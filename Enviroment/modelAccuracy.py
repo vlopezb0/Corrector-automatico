@@ -7,21 +7,23 @@ from sklearn.linear_model import LogisticRegressionCV
 import matplotlib.pyplot as plt
 import time
 import boxplot
+from pathlib import Path
+import warnings
 
-def Testability(axs,debug=0):
+def Accuracy(axs,debug=0):
 
-    aucs = "C://Users//Víctor//Desktop//TFM//Enviroment//Testability//auc.txt"
+    current_path = str(Path.cwd()).replace("\\","//")
+
+    aucs = current_path + "//Accuracy//auc.txt"
 
     fileauc = open(aucs,"a")
 
-    graficas = "C://Users//Víctor//Desktop//TFM//Enviroment//Graficas//"
-
-    path="C://Users//Víctor//Desktop//TFM//Enviroment//Testability//DataTestability.csv"
+    path= current_path + "//Accuracy//DataAccuracy.csv"
 
     file = read_csv(path,sep=";")
 
-    X = file.iloc[:,[2,3]]
-    Y = file.iloc[:,1]
+    X = file.iloc[:,[2,3,4]]
+    Y = file.iloc[:,5]
 
 
     random_state = np.random.RandomState()
@@ -37,15 +39,13 @@ def Testability(axs,debug=0):
 
         tries +=1
 
+
+
     clf = LogisticRegressionCV(random_state=random_state,cv=KFold(10),n_jobs=12).fit(X_train, y_train)
+
 
     if debug == 1:print("Predicción:",list(clf.predict(X_test)))
     if debug == 1:print("Real:",list(y_test))
-
-    try:
-        auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
-    except:
-        auc = 1
 
     pred = list(clf.predict(X_test))
 
@@ -53,7 +53,8 @@ def Testability(axs,debug=0):
     if sum(pred) == len(pred) or sum(pred) == 0:
         m = 1
 
-    colour = (0.2,0.5+(1-auc)/2,0.5+(1-auc)/2)
+
+    auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
 
     inv = 0
 
@@ -61,47 +62,46 @@ def Testability(axs,debug=0):
         y_test = 1 - y_test
         auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
         inv = 1
-        # colour = (1-0.2,1-0.2,1-(0.5+(1-auc)/2))
 
     fileauc.write(str(auc)+";")
-    
 
+    
     display = RocCurveDisplay.from_estimator(
             clf,
             X_test,
             y_test,
             ax=axs,
-            color = colour ,
+            color = (0.2,0.5+(1-auc)/2,0.2),
             label="_no",
             alpha = 0.01
         )
     
-
     tpr = np.interp(np.linspace(0,1,100),display.fpr, display.tpr)
     tpr[0] = 0.0
-        
-    
+
     if debug == 1:print("Score:",clf.score(X_test, y_test))
     if debug == 1:print("Diferencia:",list(2*clf.predict(X_test)-y_test))
 
     _ = display.ax_.set(
             xlabel="False Positive Rate",
             ylabel="True Positive Rate",
-            title="ROC Testability"
+            title="ROC Accuracy"
         )
-
-
-
+    
     fileauc.close()
-
+    
     return tpr,display.roc_auc,m,tries,inv
 
+    
 if __name__ == '__main__':
-    boxplot.borra("Testability")
-    graficas = "C://Users//Víctor//Desktop//TFM//Enviroment//Graficas//"
+    boxplot.borra("Accuracy")
+    current_path = str(Path.cwd()).replace("\\","//")
+    graficas = current_path + "//Graficas//"
     _,ax = plt.subplots()
+    ax.legend("Legend")
+    warnings.filterwarnings("ignore")
     for i in range(100):
-        Testability(ax)
-    ax.legend().remove()
-    plt.savefig(graficas+"Testability.png")
-    boxplot.boxplot("Testability")
+        Accuracy(ax)
+    warnings.filterwarnings("default")
+    plt.savefig(graficas+"Accuracy.png")   
+    boxplot.boxplot("Accuracy") 

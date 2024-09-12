@@ -7,16 +7,19 @@ import numpy as np
 from sklearn.linear_model import LogisticRegressionCV
 import matplotlib.pyplot as plt
 import boxplot
+from pathlib import Path
+import warnings
+
 
 def Validity(axs,debug=0):
+    
+    current_path = str(Path.cwd()).replace("\\","//")
 
-    aucs = "C://Users//Víctor//Desktop//TFM//Enviroment//Validity//auc.txt"
+    aucs = current_path + "//Validity//auc.txt"
 
     fileauc = open(aucs,"a")
 
-    graficas = "C://Users//Víctor//Desktop//TFM//Enviroment//Graficas//"
-
-    path="C://Users//Víctor//Desktop//TFM//Enviroment//Validity//DataValidity2.csv"
+    path= current_path + "//Validity//DataValidity.csv"
 
     file = read_csv(path,sep=";")
 
@@ -85,10 +88,13 @@ def Validity(axs,debug=0):
 
 if __name__ == '__main__':
     boxplot.borra("Validity")
-    graficas = "C://Users//Víctor//Desktop//TFM//Enviroment//Graficas//"
+    current_path = str(Path.cwd()).replace("\\","//")
+    graficas = current_path + "//Graficas//"
     _,ax = plt.subplots()
+    warnings.filterwarnings("ignore")
     for i in range(100):
         Validity(ax)
+    warnings.filterwarnings("default")
     ax.legend().remove()
     plt.savefig(graficas+"Validity.png")
     boxplot.boxplot("Validity")
