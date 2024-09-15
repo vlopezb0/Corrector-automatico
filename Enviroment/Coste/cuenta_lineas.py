@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 
 """
@@ -84,22 +85,16 @@ def count_tokens_comment(path):
 
     tokens = list(map(lambda x:re.sub(r'(^\*.*|^\\\*.*|^\/\*.*)',"",x),tokens))
 
-    # print(tokens)
-    # print(lineas)
-
     tokens = list(map(lambda x: re.split('(\;|{|}|\)|\(|\.|\+|\-|\=|\n|\s|\"|\,|\[|\])+',x),tokens))
 
-    # print(tokens)
-
     tokens = list(map(lambda y:list(filter(lambda x: x != " " and x != "\n",filter(None,y))),tokens))
-    
-    # print(tokens)
 
     num_tokens = sum(map(len,tokens))
 
     return num_tokens
 
-
-
-# path = r"C:\Users\Víctor\Desktop\TFM\Archivos\sc\a\sc19%sca-09%12_25_25.java"
-# print(count_tokens_comment(path))
+# Main en caso de ejecutarlo desde este fichero
+if __name__ == '__main__':
+    current_path = str(Path.cwd().parent.parent).replace("\\","//")
+    path = current_path + "//Archivos//mtp//a//mtpg1a-01%13_48_17.java"
+    print(count_tokens_comment(path))

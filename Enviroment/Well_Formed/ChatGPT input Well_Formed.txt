@@ -1,48 +1,50 @@
 Voy a pasarte un código de Java que intenta resolver el siguiente problema:
 
+Con el objetivo de seguir practicando la creación de sesiones y clientes, el envío y recepción de mensajes a través de canales y, en este caso, la manipulación de diferentes tipos de mensajes, crear un programa en Java que realice lo siguiente:
 
-Construir un programa que obtenga el término n de la serie de Fibonacci.
-La serie de Fibonacci es una secuencia de enteros, cada uno de los cuales es la suma de los dos anteriores. Los dos primeros números de la secuencia son 0 y 1 para n=0 y n=1 respectivamente.
-Para todo n>1, la serie se define como:
-Fibonacci(n) = Fibonacci(n-1) + Fibonacci(n-2)
-Úsese un método recursivo para calcular dicho término. 
+(a) Inicialmente se lanzará el registro de JSDT.
+
+(b) Crear una sesión (ses) y dos canales (ch1 y ch2) asociados a ella.
+
+(c) Crear tres clientes (cl1, cl2 y cl3) con el siguiente comportamiento:
+
+(c.1) El cliente cl1 se encargará de enviar al cliente cl2, a través de ch1, un mensaje indicando una operación aritmética a realizar: suma, inverso o máximo de tres números. Para cada operación se utilizará un tipo (clase) de mensaje diferente (de hecho, cada operación requiere diferente número de operandos).
+
+(c.2) Así, el cliente cl2 recibirá operaciones aritméticas por ch1, calculará su resultado y lo enviará a cl3 a través de ch2.
+
+(c.3) El tercer cliente, cl3, mostrará el resultado de las operaciones por pantalla.
+
+(d) Se deberá desarrollar un ejemplo de realización de tres operaciones de acuerdo al esquema planteado. No hará falta por tanto leer ningún dato por teclado, sino que el ejemplo de cada operación se codificará en el programa principal.
+
+(e) Finalmente, el registro se detendrá.
+
+
+
 
 
 Este código puede contener un error o más de la siguiente serie de errores:
    
--NoCompila:             El programa no compila al tener algún error de compilación.
--FaltaPuntocoma:        Falta ; al final de una linea.
--FaltaVariable:         Falta asignar a una variable el valor que se obtiene.
--VoidReturn:            Una función de tipo void tiene un return que no debería tener.
--PrimiMisspell:         Una primitiva esta mal escrita.
--FaltaReturn:           No hay return en una función que deberia tenerlo.
--OutIncorrecto:         El output del programa es incorrecto respecto a lo que se pide en el problema.
--VariableNoDeclarada:   Una variable se hace referencia sin estar declarada.
--VariableNoIni:         Una variable se usa sin estar inicializada.
--FaltaLlaves:           Se abren { pero no se cierran con un }.
--ImportMal:             El import esta mal escrito / no se hace de la forma correcta.
--ConstructorClaseIgual: El nombre del constructor y de la clase es el mismo.
--VariableNoUsada:       Hay una variable que se define pero no se usa.
--TokensExtra:           Hay tokens innecesarios.
--FaltaParentesis        Se abren ( pero no se cierran con un ).
--RecursionInf :         Al no haber un caso base o no tener en cuenta casos negativos, la recursión es infinita.
--ExtraPuntoComa:        Hay ; innecesarios.
--PuntoComaPorComa:      Se ha usado una ; donde debería haber un ,.
--VariableDupli:         Hay una variable definida dos o más veces.
--FuncionNoDef:          Hay una función que se usa sin estar definida.
--ExcepcionInnece:       Una función lanza una excepción innecesariamente.
--NumArgFuncion:         El número de argumentos al llamar a la función es incorrecto.
--MalLlamadaFuncion:     Se llama a la función de manera incorrecta.
--InputVacio:            El programa falla al introducir input vacio.
--IndexOutOfBounds:      Salta la excepción IndexOutOfBounds.
--VariableUsandoPrimi:   El nombre de la variable usa un nombre de primitiva.
--FaltaComentario:       Falta el comentario //, haciendo la linea inválida.
--WhileInf:              El bucle while no acaba nunca.
--NoInput:               El programa no ofrece introducir input.
--Division0:             En caso de llegar a dividir por 0, el programa falla.
--StringMal:             No se usa bien la sintaxis de los Strings.
--TipoErroneo:           Se usa un tipo de variable no adecuada para el programa(p.e.:int en vez de double para números decimales).
--LecturaInput:		Esta leyendo el input de manera erronea.
+-NoCompila              El programa tiene algún error de compilación.                           
+-FaltaPuntocoma         Falta un '';'' al final de una linea.                                                 
+-PrimiMisspell          Una primitiva esta mal escrita.                                                       
+-FaltaReturn            No hay un return en una función que debería tenerlo.                         
+-OutIncorrecto          El output del programa es incorrecto respecto a lo que se pide en el problema.        
+-VariableNoDeclarada    Una variable se hace referencia sin estar declarada.                                  
+-VariableNoIni          Una variable se usa sin estar inicializada.                                           
+-FaltaLlaves            Se abren ''{'' pero no se cierran con otra ''}''.                                       
+-ImportMal              El import está mal escrito o no se hace de la forma correcta.                
+-ConstructorClaseIgual  El nombre del constructor y de la clase es el mismo.                                  
+-VariableNoUsada        Hay una variable que se define pero no se usa.                                        
+-TokensExtra            Hay tokens innecesarios, como podría ser un '';'' extra.                                
+-FaltaParentesis        Se abren ''('' pero no se cierran con un '')''.                                           
+-RecursionInf           Al no haber un caso base o no tener en cuenta casos negativos, la recursión o bucle es infinito. 
+-FuncionNoDef           Hay una función que se usa sin estar definida.                                        
+-NumArgFuncion          El número de argumentos al llamar a la función es incorrecto.                         
+-InputVacio             El programa falla al introducir input vació.                                          
+-IndexOutOfBounds       Salta la excepción IndexOutOfBounds.                                         
+-VariableUsandoPrimi    El nombre de la variable usa un nombre de primitiva.                                  
+-TipoErroneo            Se usa un tipo de variable no adecuada para el valor que se  guardará. (p.e.:int en vez de double para números decimales). 
+-LecturaInput           Se está leyendo el input de manera errónea o no está ofreciendo introducir input.     
 
 
 El codigo es el siguiente:
@@ -51,4 +53,12 @@ El codigo es el siguiente:
 
 
 
-Respuesta:  Tienes que decir cuales de estos se producen, representándolo en una sucesión de 0s y 1s separados por comas. Marcarás con un 1 los que sí se producen, y con un 0 los que no, en un formato que se pueda copiar y pegar y apareciendo todos 33 los errores. Razónalo paso a paso.
+
+
+
+
+
+
+
+
+Respuesta:  Tienes que decir cuales de estos se producen, representándolo en una sucesión de 0s y 1s separados por comas. Marcarás con un 1 los que sí se producen, y con un 0 los que no, en un formato que se pueda copiar y pegar y apareciendo todos 21 los errores. Razónalo paso a paso.

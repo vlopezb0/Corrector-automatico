@@ -1,100 +1,147 @@
-import random
-import time
-from pandas import read_csv
-from sklearn.metrics import RocCurveDisplay, roc_auc_score
-from sklearn.model_selection import KFold, LeaveOneOut, train_test_split
-import numpy as np
-from sklearn.linear_model import LogisticRegressionCV
-import matplotlib.pyplot as plt
-import boxplot
 from pathlib import Path
+from matplotlib import pyplot as plt
+import pandas as pd
+import numpy as np
+from sklearn.metrics import RocCurveDisplay, roc_auc_score
+from sklearn.model_selection import KFold, StratifiedKFold
+from sklearn.linear_model import LogisticRegressionCV
 import warnings
+import boxplot
 
+def Validity(axs,dp=None,debug=0):
+    '''Modelo para predecir la medida de Validity
 
-def Validity(axs,debug=0):
-    
+    Parametros:
+        -axs : Subclase de la figura donde dibujar las curvas ROC.
+        -dp : DataFrame con las predicciones de Well_Formed
+        -debug : Opcional, para ver resultados.
+
+    Devuelve:
+        -tprs: Array con los TPR obtenidos.
+        -displays: Array con las curvas ROC obtenidas.
+        -m: Número de predicciones vacias hechas.
+        -inv: Número de inversiones realizadas.
+        -data_predict: DataFrame minimal con los nombres y predicciones de la medida
+    '''
+    # Path relativo
     current_path = str(Path.cwd()).replace("\\","//")
 
+    # Apertura de ficheros
     aucs = current_path + "//Validity//auc.txt"
-
     fileauc = open(aucs,"a")
 
-    path= current_path + "//Validity//DataValidity.csv"
+    path = current_path + "//Validity//DataValidity.csv"
+    file = pd.read_csv(path,sep=";")
 
-    file = read_csv(path,sep=";")
+    # Creamos DataFrames con los datos, escogiendo X e Y en cada caso
+    data = pd.DataFrame(file)  
 
-    X = file.iloc[:,[2,4]]
-    Y = file.iloc[:,5]
+    # Escogemos X e Y (Si se ha ejecutado desde este archivo, se usaran medidas calculadas de COLLECE, provocará resultados optimistas)
+    if dp is None:
+        X = data[["WellFormed","Recursion Chat"]]
+    else:
+        # Pasamos datos inferidos
+        data = pd.merge(data,dp,on="Nombre")
+        X = data[["Predict_Well_Formed","Recursion Chat"]]
 
+    Y = data["Validity"]
+
+    # Creamos columnas en el DataFrame para los resultados
+    data["Predict_Validity"] = -1
+
+    # Iniciamos RNG
     random_state = np.random.RandomState()
 
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=random_state)
-
-    tries=0
-
-    while sum(y_test) == len(y_test) or sum(y_test) == 0 or sum(y_train) == len(y_train) or sum(y_test) == 0:
-        random_state = np.random.RandomState()
-
-        X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=random_state)
-
-        tries +=1
-
-    clf = LogisticRegressionCV(random_state=random_state,cv=KFold(10),n_jobs=12).fit(X_train, y_train)
-
-
-    if debug == 1:print("Predicción:",list(clf.predict(X_test)))
-    if debug == 1:print("Real:",list(y_test))
-
-    try:
-        auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
-    except:
-        auc = 1
-
-    pred = list(clf.predict(X_test))
-
+    # Creamos la separación estratificada
+    skf = StratifiedKFold(n_splits=5,shuffle=True,random_state=random_state)
+    
+    # Valores que se retornaran
+    tprs = []
+    displays = []
     m = 0
-    if sum(pred) == len(pred) or sum(pred) == 0:
-        m = 1
+    inv = 0
 
+    # Por cada fold
+    for train,test in skf.split(X,Y):
+        # Separamos los datos en train y test de X e Y
+        X_train, X_test = X.iloc[train], X.iloc[test]
+        y_train, y_test = Y.iloc[train], Y.iloc[test]
 
-    fileauc.write(str(auc)+";")
+        # Entrenamos el modelo de Regresión Logística con un KFold(10), usando todos los cores
+        clf = LogisticRegressionCV(random_state=random_state,cv=KFold(10),n_jobs=12).fit(X_train, y_train)
 
-    display = RocCurveDisplay.from_estimator(
-            clf,
-            X_test,
-            y_test,
-            ax=axs,
-            color = (0.5+(1-auc)/2,0.2,0.5+(1-auc)/2),
-            label="_no",
-            alpha = 0.01
-        )
+        # Predecimos Validity y lo guardamos en el DataFrame
+        pred = list(clf.predict(X_test))
+
+        data.loc[test,"Predict_Validity"] = pred
+
+        # En caso de querer debugear, imprimimos información relevante
+        if debug == 1:
+            print("Score:",clf.score(X_test, y_test))
+            print("Predicción:",list(clf.predict(X_test)))
+            print("Real:",list(y_test))
+            print("Diferencia:",list(2*clf.predict(X_test)-y_test))
+
+        # En caso de hacer una prediccion vacia la guardamos
+        if sum(pred) == len(pred) or sum(pred) == 0:
+            m += 1
+
+        # Calculamos el aucs
+        auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
+   
+        # En caso de ser un auc menor de 0,5, invertimos
+        if auc < 0.5:
+            y_test = 1 - y_test
+            auc = roc_auc_score(y_test,clf.predict_proba(X_test)[:, 1])
+            inv = 1
+
+        # Guardamos el auc
+        fileauc.write(str(auc)+";")
+
+        # Creamos la curva ROC
+        display = RocCurveDisplay.from_estimator(
+                clf,
+                X_test,
+                y_test,
+                ax=axs,
+                color = (0.5+(1-auc)/2,0.2,0.5+(1-auc)/2),
+                label="_no",
+                alpha = 1/510
+            )
+
+        # Hacemos el TPR   
+        tpr = np.interp(np.linspace(0,1,100),display.fpr, display.tpr)
+        tpr[0] = 0.0
     
-    tpr = np.interp(np.linspace(0,1,100),display.fpr, display.tpr)
-    tpr[0] = 0.0
-    
-    if debug == 1:print("Score:",clf.score(X_test, y_test))
-    if debug == 1:print("Diferencia:",list(2*clf.predict(X_test)-y_test))
+        # Guardamos tanto el TPR como la curva ROC
+        tprs.append(tpr)
+        displays.append(display.roc_auc)
 
-    _ = display.ax_.set(
-            xlabel="False Positive Rate",
-            ylabel="True Positive Rate",
-            title="ROC Validity"
-        )
-
+    # Cerramos el fichero
     fileauc.close()
 
-    return tpr,display.roc_auc,m,tries
-    
+    data_predict=pd.DataFrame({"Nombre" : data["Nombre"],
+                                "Predict_Validity" : data["Predict_Validity"]})
 
+
+    return tprs,displays,m,inv,data_predict
+
+    
+# Main en caso de ejecutarlo desde este fichero para centrarse en una métrica 
 if __name__ == '__main__':
     boxplot.borra("Validity")
     current_path = str(Path.cwd()).replace("\\","//")
     graficas = current_path + "//Graficas//"
     _,ax = plt.subplots()
+    rango = 500
     warnings.filterwarnings("ignore")
-    for i in range(100):
+    for i in range(rango):
+        porcentaje = (int) (i/rango * 100)
+        rayitas = (int) (porcentaje/2)
+        numIter = "Iteración número: " + str(i).rjust(3) + " de " + str(rango) + " ["+"#"*rayitas+"-"*(50-rayitas)+"] " + str(porcentaje) + "%"
+        print(numIter, end='')
+        print('\b' * len(numIter), end='', flush=True)
         Validity(ax)
     warnings.filterwarnings("default")
-    ax.legend().remove()
     plt.savefig(graficas+"Validity.png")
     boxplot.boxplot("Validity")

@@ -3,7 +3,7 @@ class Fibonacci{
 public static void main(String[]args)throws IOException{
 BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
 int n, resul;
-System.out.println("Introduzca el término a calcular")
+System.out.println("Introduzca el trmino a calcular")
 n=Interger.parseInt(leer.readLine());
 resul=recursividad(n);
 System.out.println("El resultado es: "+resul);
