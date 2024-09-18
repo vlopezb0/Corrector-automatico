@@ -25,3 +25,14 @@ python scriptAutoguipy.py
 
 Esto bloqueará el ordenador hasta que termine el proceso, al usar el ratón y teclado. Guardará los datos en el Excel abierto.
 
+# Stack tecnológico
+El stack tecnológico es el siguiente:
+- Editores de textos:
+  - Visual Studio Code 1.93
+- Lenguajes:
+  - Python 3.10.2
+- Librerías de Python:
+  - sklearn 1.5.0
+  - pandas 1.5.1
+  - numpy 1.23.4
+  - matplotlib 3.9.2
