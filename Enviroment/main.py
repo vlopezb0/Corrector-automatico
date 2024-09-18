@@ -49,7 +49,7 @@ if __name__ == '__main__':
     boxplot.borra() 
 
     # Numero de simulaciones
-    rango = 5
+    rango = 500
 
     # Creamos los diccionarios para poder guardar datos
     tprs = collections.defaultdict(lambda : [])

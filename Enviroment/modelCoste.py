@@ -70,7 +70,7 @@ def Coste(axs,debug=0):
         y_train, y_test = Y2.iloc[train], Y2.iloc[test]
 
         # Entrenamos el modelo de Regresión Logística con un KFold(10), usando todos los cores
-        clf2 = LogisticRegressionCV(random_state=random_state,cv=KFold(10),n_jobs=12).fit(pd.DataFrame(X_train.iloc[:,1]),y_train.values.ravel())
+        clf2 = LogisticRegressionCV(random_state=random_state,cv=StratifiedKFold(10),n_jobs=12).fit(pd.DataFrame(X_train.iloc[:,1]),y_train.values.ravel())
         
         # Predecimos los tokens y los guardamos en el DataFrame
         predicts_tokens=np.ceil(clf.predict(X_test)).reshape(-1,1)
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     current_path = str(Path.cwd()).replace("\\","//")
     graficas = current_path + "//Graficas//"
     _,ax = plt.subplots()
-    rango = 100
+    rango = 500
     warnings.filterwarnings("ignore")
     for i in range(rango):
         porcentaje = (int) (i/rango * 100)

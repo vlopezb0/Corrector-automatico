@@ -37,7 +37,7 @@ def boxplot(tipos = None):
         bp = axact.boxplot(datos)
         # Ponemos labels y guardamos
         tipoa = tipo
-        if tipoa == "Coste": tipoa = "Cost (Líneas)"
+        if tipoa == "Coste": tipoa = "Cost (Tokens)"
         axact.set(ylabel = "Area under the curve (AUC)", title= "AUC " + tipoa)
         file.close()
         plt.savefig(graficas+tipo+"Box"+".png")
@@ -69,4 +69,4 @@ def borra(tipos = None):
 
         
 if __name__ == '__main__':
-    boxplot()
+    borra()

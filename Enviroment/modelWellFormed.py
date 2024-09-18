@@ -60,7 +60,7 @@ def WellFormed(axs,debug = 0):
         y_train, y_test = Y.iloc[train], Y.iloc[test]
 
         # Entrenamos el modelo de Regresión Logística con un KFold(10), usando todos los cores
-        clf = LogisticRegressionCV(random_state=random_state,cv=KFold(10),n_jobs=12).fit(X_train, y_train)
+        clf = LogisticRegressionCV(random_state=random_state,cv=StratifiedKFold(10),n_jobs=12).fit(X_train, y_train)
 
         # Predecimos Well_Formed y lo guardamos en el DataFrame
         pred = list(clf.predict(X_test))

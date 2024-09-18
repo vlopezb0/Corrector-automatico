@@ -7,16 +7,16 @@ pag.PAUSE = 0.2 # Pausa entre cada llamada por si acaso algo sale mal (Hay que m
 pag.FAILSAFE = True # Failsafe activado
 
 
-num_programas = 6 # Número de programas de un problema en concreto
+num_programas = 10 # Número de programas de un problema en concreto
 
 def procesa_funcion(pos):
     """ Realiza una consulta a ChatGPT y la guarda en un excel
     SETUP
-    ChatGPT abierto en la ventana superior izquierda
-    Texto con el input de la métrica que queramos en la ventana inferior derecha
-    Excel en la ventana inferior izquierda
-    Carpeta y visual en la ventana superior derecha
-    Carpeta el primer icono de la barra de tareas
+    ChatGPT abierto en la ventana superior izquierda.
+    Texto con el input de la métrica que queramos en la ventana inferior derecha.
+    Excel en la ventana inferior izquierda.
+    Carpeta y Visual Studio Code en la ventana superior derecha.
+    Carpeta el primer icono de la barra de tareas.
     """
     # Nuevo chat (menu)
     pag.click(760,25,duration=random.random()+0.5) 
