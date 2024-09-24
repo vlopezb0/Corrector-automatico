@@ -1,4 +1,4 @@
-Esto es el código perteniente al Trabajo de Fin de Máster "Aplicación de Modelos Grandes de Lenguaje para la evaluación problemas de programación".
+Esto es el código perteneciente al Trabajo de Fin de Máster "Aplicación de Modelos Grandes de Lenguaje para la evaluación problemas de programación".
 
 Existen dos programas, el modelo de regresión logística y el script para automatizar consultas a ChatGPT.
 
@@ -27,9 +27,9 @@ Esto bloqueará el ordenador hasta que termine el proceso, al usar el ratón y t
 
 # Stack tecnológico
 El stack tecnológico es el siguiente:
-- Editores de textos:
+- Editor de texto:
   - Visual Studio Code 1.93
-- Lenguajes:
+- Lenguaje:
   - Python 3.10.2
 - Librerías de Python:
   - sklearn 1.5.0
